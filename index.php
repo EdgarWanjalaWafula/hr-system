@@ -1,5 +1,7 @@
 <?php 
 
+session_start(); 
+
 // Load header
 require_once('header.php'); 
 ?>
@@ -10,17 +12,47 @@ require_once('header.php');
                     <div class="col-md-6 p-0">
                         <img src="imgs/backgrounds/login-background.jpg" alt="" class="login-background">
                     </div>
-                    <div class="col-md-5 d-flex align-items-center">
+                    
+                    <div class="col-md-4 offset-1 d-flex align-items-center">
                         <div class="landing-form-form w-100">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <?php 
+                                if(isset($_POST['signup_button'])){
+        
+                                    // Include database connection 
+                                    require_once('connection/connection.php'); 
+                                    // $ufname = $uemail = $upassword = ""; 
+                                
+                                    $ufname     = $_POST['user_fullname'];
+                                    $uemail     = $_POST['user_email'];
+                                    $upassword  = $_POST['user_password'];
+                                
+                                    // Insert into database query 
+                                    $register   = "INSERT INTO users (fullnames, email, password, created_at) VALUES ('". $ufname."', '". $uemail."', '". $upassword."', now())";
+                                    
+                                    if($mysqli->query($register) === true){
+                                        ?> 
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                Congratulations <?php echo $ufname; ?>, you have successfully registered
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        <?php       
+                                    } else {
+                                        echo "error '".$mysqli->connect_error."'";
+                                    }
+                                }
+                            ?>
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a></li>
                                 <li class="nav-item"><a class="nav-link" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Sign Up</a></li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                                    <form action="">
+                                    <form action="" autocomplete="off" >
+                                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
                                         <div class="form-group">
-                                          <input type="email" name="user_email" id="" class="form-control" placeholder="email@example.com" aria-describedby="helpId">
+                                          <input autocomplete="off" type="email" name="user_email" id="" class="form-control" placeholder="email@example.com" aria-describedby="helpId">
                                         </div>
                                         <div class="form-group">
                                           <input type="password" name="user_password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
@@ -30,7 +62,23 @@ require_once('header.php');
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">...</div>
+                                <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+                                    <form method="post" action="index.php" autocomplete="off" >
+                                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                                        <div class="form-group">
+                                          <input type="text" name="user_fullname" id="" class="form-control" placeholder="Full Names " aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="email" name="user_email" id="" class="form-control" placeholder="email@example.com" aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="password" name="user_password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" name="signup_button" class="btn">Register <ion-icon name="arrow-round-forward"></ion-icon> </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
