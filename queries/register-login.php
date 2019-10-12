@@ -1,4 +1,14 @@
 <?php 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+    require 'vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+    
+    // Load Composer's autoloader
+    require 'vendor/autoload.php';
+
     if(isset($_POST['signup_button'])):
 
         // Include database connection 
@@ -9,7 +19,7 @@
     
         $ufname     = $_POST['user_fullname'];
         $uemail     = $_POST['user_email'];
-        $upassword  = $_POST['user_password'];
+        $upassword  = md5($_POST['user_password']);
 
         // Check if email exists 
         $check  = "SELECT * FROM users WHERE email = '$uemail' LIMIT 1"; 
@@ -42,8 +52,43 @@
                         </button>
                     </div>
                 <?php       
-             else:
+
+                    // Instantiation and passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug    = 4;     
+                        $mail->Debugoutput  = 'html';                 // Enable verbose debug output
+                        $mail->isSMTP();                                            // Send using SMTP
+                        $mail->Host         = 'smtp.gmail.com'; 
+                        $mail->SMTPSecure   = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                        $mail->Port         = 587;                     // Set the SMTP server to send through
+                        $mail->SMTPAuth     = true;                                   // Enable SMTP authentication
+                        $mail->Username     = 'wafulawanjalaedgar@gmail.com';                     // SMTP username
+                        $mail->Password     = 'Makaveli61549';                               // SMTP password                                  // TCP port to connect to
+
+                        //Recipients
+                        $mail->setFrom('from@example.com', 'Mailer');
+                        $mail->addAddress('wafulawanjalaedgar@gmail.com', '');     // Add a recipient              // Name is optional
+                        $mail->addReplyTo('info@example.com', 'Information');
+                        $mail->addCC('cc@example.com');
+                        $mail->addBCC('bcc@example.com');
+
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Here is the subject';
+                        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                        
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+            else:
                 echo "error '".$mysqli->connect_error."'";
-             endif; 
+            endif; 
         endif; 
     endif;

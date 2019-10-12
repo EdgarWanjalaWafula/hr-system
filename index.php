@@ -1,6 +1,6 @@
 <?php 
 
-session_start(); 
+// session_start(); 
 
 // Load header
 require_once('header.php'); 
@@ -11,18 +11,19 @@ require_once('header.php');
             
                 <!-- Add notification for user  -->
                 <div class="user-notification">
-                    <?php require('queries/register-login.php'); ?>
+                  
                 </div>
 
                 <!-- Start row with form and background image -->
                 <div class="row no-gutters w-100 h-100">
                     <div class="col-md-7 p-0 bg-column">
-                        <img src="imgs/backgrounds/login-background.jpg" alt="" class="login-background">
+                    <?php require('queries/register-login.php'); ?>
+                        <!-- <img src="imgs/backgrounds/login-background.jpg" alt="" class="login-background"> -->
                     </div>
 
                     <div class="col-md-3 offset-1 d-flex align-items-center">
                         <div class="landing-form-form w-100">
-                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a></li>
                                 <li class="nav-item"><a class="nav-link" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Sign Up</a></li>
                             </ul>
