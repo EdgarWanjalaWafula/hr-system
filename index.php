@@ -1,6 +1,6 @@
 <?php 
 
-// session_start(); 
+session_start(); 
 
 // Load header
 require_once('header.php'); 
