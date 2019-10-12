@@ -8,41 +8,20 @@ require_once('header.php');
     <section class="landing-form">
         <div class="container-fluid p-0">
             <div class="row no-gutters w-100 h-100">
+            
+                <!-- Add notification for user  -->
+                <div class="user-notification">
+                    <?php require('queries/register-login.php'); ?>
+                </div>
+
+                <!-- Start row with form and background image -->
                 <div class="row no-gutters w-100 h-100">
-                    <div class="col-md-6 p-0">
+                    <div class="col-md-7 p-0 bg-column">
                         <img src="imgs/backgrounds/login-background.jpg" alt="" class="login-background">
                     </div>
-                    
-                    <div class="col-md-4 offset-1 d-flex align-items-center">
+
+                    <div class="col-md-3 offset-1 d-flex align-items-center">
                         <div class="landing-form-form w-100">
-                            <?php 
-                                if(isset($_POST['signup_button'])){
-        
-                                    // Include database connection 
-                                    require_once('connection/connection.php'); 
-                                    // $ufname = $uemail = $upassword = ""; 
-                                
-                                    $ufname     = $_POST['user_fullname'];
-                                    $uemail     = $_POST['user_email'];
-                                    $upassword  = $_POST['user_password'];
-                                
-                                    // Insert into database query 
-                                    $register   = "INSERT INTO users (fullnames, email, password, created_at) VALUES ('". $ufname."', '". $uemail."', '". $upassword."', now())";
-                                    
-                                    if($mysqli->query($register) === true){
-                                        ?> 
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                Congratulations <?php echo $ufname; ?>, you have successfully registered
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <?php       
-                                    } else {
-                                        echo "error '".$mysqli->connect_error."'";
-                                    }
-                                }
-                            ?>
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a></li>
                                 <li class="nav-item"><a class="nav-link" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Sign Up</a></li>
@@ -58,7 +37,7 @@ require_once('header.php');
                                           <input type="password" name="user_password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" name="login_button" class="btn">Login <ion-icon name="arrow-round-forward"></ion-icon> </button>
+                                            <button type="submit" name="login_button" class="btn">Login <i class="icon ion-ios-arrow-round-forward"></i></button>
                                         </div>
                                     </form>
                                 </div>
@@ -75,7 +54,7 @@ require_once('header.php');
                                           <input type="password" name="user_password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" name="signup_button" class="btn">Register <ion-icon name="arrow-round-forward"></ion-icon> </button>
+                                            <button type="submit" name="signup_button" class="btn">Register <i class="icon ion-ios-unlock"></i> </button>
                                         </div>
                                     </form>
                                 </div>

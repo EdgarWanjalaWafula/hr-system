@@ -20,6 +20,10 @@ body{
     object-fit: cover;
 }
 
+.bg-column{
+	position: relative;;
+}
+
 .landing-form-form > ul {
 	padding: 0px 0px 35px;
 	justify-content: end;
@@ -59,4 +63,23 @@ body{
 
 .form-control:focus {
 	box-shadow: none;
+}
+
+.user-notification{
+	position: absolute;
+	right: 0;
+	margin: 16px;
+	width: 30%;
+}
+
+.landing-form-form .btn {
+	background: #261d22;
+	border-radius: 0px;
+	width: 50%;
+	color: #fff;
+}
+
+.alert {
+	border: 0px;
+	border-radius: 0px;
 }
