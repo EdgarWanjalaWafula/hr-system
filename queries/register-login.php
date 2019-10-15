@@ -44,9 +44,12 @@
             $register   = "INSERT INTO users (fullnames, email, password, created_at) VALUES ('". $ufname."', '". $uemail."', '". $upassword."', now())";
             
             if($mysqli->query($register) === true): 
+                $firstname = ""; 
+                $firstname = explode(" ", $ufname);
+                $firstname[0]; 
                 ?> 
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Congratulations <?php echo $ufname; ?>, you have successfully registered
+                        Congratulations <?php echo $firstname[0]; ?>, you have successfully registered
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -54,11 +57,11 @@
                 <?php       
 
                     // Instantiation and passing `true` enables exceptions
-                    $mail = new PHPMailer(true);
+                    $mail = new PHPMailer();
 
                     try {
                         //Server settings
-                        $mail->SMTPDebug    = 4;     
+                        $mail->SMTPDebug    = 0;     
                         $mail->Debugoutput  = 'html';                 // Enable verbose debug output
                         $mail->isSMTP();                                            // Send using SMTP
                         $mail->Host         = 'smtp.gmail.com'; 
@@ -66,14 +69,14 @@
                         $mail->Port         = 25;                     // Set the SMTP server to send through
                         $mail->SMTPAuth     = true;                                   // Enable SMTP authentication
                         $mail->Username     = 'wafulawanjalaedgar@gmail.com';                     // SMTP username
-                        $mail->Password     = 'Makaveli61549';                               // SMTP password                                  // TCP port to connect to
+                        $mail->Password     = 'Makaveli61549';                                      // SMTP password                                  // TCP port to connect to
 
                         //Recipients
-                        $mail->setFrom('from@example.com', 'Mailer');
+                        $mail->setFrom('dancankimani70@gmail.com', 'Mailer');
                         $mail->addAddress('wafulawanjalaedgar@gmail.com', '');     // Add a recipient              // Name is optional
-                        $mail->addReplyTo('info@example.com', 'Information');
-                        $mail->addCC('cc@example.com');
-                        $mail->addBCC('bcc@example.com');
+                        $mail->addReplyTo('dancankimani70@gmail.com', 'Information');
+                        // $mail->addCC('cc@example.com');
+                        // $mail->addBCC('bcc@example.com');
 
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
@@ -83,12 +86,57 @@
 
                         $mail->send();
                         
-                        echo 'Message has been sent';
+                        // echo 'Message has been sent';
                     } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
             else:
                 echo "error '".$mysqli->connect_error."'";
             endif; 
         endif; 
-    endif;
+
+        $result->free(); 
+
+    elseif(isset($_POST['login_button'])):
+
+        // Include database connection 
+        include('connection/connection.php');
+
+        // Initialize variables
+        $ufname = $uemail = $upassword = ""; 
+        
+        // Prevent SQL Injection 
+        $uemail = stripslashes($uemail); 
+        $upassword = stripslashes($upassword ); 
+
+        $uemail     = $_POST['user_email'];
+        $upassword  = md5($_POST['user_password']);
+        
+        // Select all users first with the provided condition
+        $query = "SELECT * FROM users WHERE email = '".$uemail."' AND password = '".$upassword."' "; 
+        $userlogin = $mysqli->query($query); 
+
+        $result = mysqli_num_rows($userlogin); 
+
+        if($result == 1): 
+
+            $row = mysqli_fetch_assoc($result); 
+
+            // Create a session with the session name and current user id and redirect to dashboard
+            $_SESSION['auth'] = true; 
+            $_SESSION['session_id'] = $row['user_id']; 
+            header("Location: dashboard/xtreme-html/ltr/index.html");
+        else: 
+            ?> 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Incorrect email/password combination. Try again. 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php   
+        endif; 
+        
+        $mysqli->close(); 
+    endif; 
+
