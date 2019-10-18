@@ -1,3 +1,12 @@
+<?php 
+session_start(); 
+
+if(!isset($_SESSION['auth'])):
+
+    // Redirect user to login screen 
+    header("Location: ../../../index.php"); 
+endif; 
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -127,7 +136,7 @@
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">Steave Jobs <i class="fa fa-angle-down"></i></h5>
-                                        <span class="op-5 user-email">varun@gmail.com</span>
+                                        <span class="op-5 user-email">varun@gmail.com <?php echo $_SESSION['session_id']; ?></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
