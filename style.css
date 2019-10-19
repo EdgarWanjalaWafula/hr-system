@@ -9,6 +9,21 @@ body{
 	height: 100vh;
 }
 
+.landing-form {
+	background-image: url('imgs/backgrounds/login-background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover; 
+	position: relative;
+}
+
+.landing-form::before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.3);
+}
+
 .login-background {
 	position: absolute;
 	height:100vh;
@@ -18,6 +33,14 @@ body{
 	left: 0;
     right: 0;
     object-fit: cover;
+}
+
+.landing-form-form {
+	background: #fff;
+}
+
+ .landing-form-form{
+	padding: 24px;
 }
 
 .bg-column{
