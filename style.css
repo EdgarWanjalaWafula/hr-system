@@ -40,7 +40,7 @@ body{
 }
 
  .landing-form-form{
-	padding: 24px;
+	padding:35px;
 }
 
 .bg-column{
@@ -95,7 +95,7 @@ body{
 }
 
 .landing-form-form .btn {
-	background: #261d22;
+	background: #375e97;
 	border-radius: 0px;
 	width: 50%;
 	color: #fff;

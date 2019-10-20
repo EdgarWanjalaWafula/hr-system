@@ -14,7 +14,7 @@
                     <!-- User Profile-->
                     <div class="user-profile d-flex no-block dropdown m-t-20">
                         <div class="user-pic"><img src="../../assets/images/users/1.jpg" alt="users" class="rounded-circle" width="40" /></div>
-                        <div class="user-content hide-menu m-l-10">
+                        <div class="user-content hide-menu m-l-10 w-100">
                             <?php 
                                 include_once "../../../connection/connection.php"; 
 
@@ -54,12 +54,12 @@
                     <!-- End User Profile-->
                 </li>
                 <?php 
-                    $user_role = ""; 
-                    $user_role = $row['role'];
+                    // $user_role = ""; 
+                    // $user_role = $row['role'];
 
-                    // echo $user_role; 
+                    // // echo $user_role; 
 
-                    if($user_role == "employee"): 
+                    // if($user_role == "employee"): 
                         ?>
                             <li class="p-15 m-t-10"><a href="add_employee.php" class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i class="fa fa-plus-square"></i> <span class="hide-menu m-l-5">Create New</span> </a></li>
                             <!-- User Profile-->
@@ -68,9 +68,9 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span class="hide-menu">Table</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Icon</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Blank</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span class="hide-menu">404</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false"><span class="hide-menu">404</span><i class="mdi mdi-alert-outline"></i></a></li>
                         <?php 
-                    endif; 
+                    // endif; 
                 ?>
             </ul>
             

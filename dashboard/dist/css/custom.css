@@ -1,0 +1,36 @@
+.sidebar-nav ul{
+    background-color:transparent !important;
+    padding-top:16px !important;
+}
+
+.left-sidebar {
+	background: url('../../../imgs/backgrounds/admin-bg.jpg') !important;
+	padding-top: 0;
+    background-size: cover !important;
+    position:fixed !important; 
+}
+
+.left-sidebar::before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.7);
+}
+
+.topbar {
+	margin-left: 250px;
+}
+
+#main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin6"] .create-btn, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin6"] .create-btn {
+	background: #375e97 !important;
+}
+
+.sidebar-link {
+	color: white !important;
+	font-weight: 600;
+}
+
+#main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-content, #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-email, #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-name, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-content, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-email, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin6"] .sidebar-nav .user-name {
+	color: #fff !important;
+}

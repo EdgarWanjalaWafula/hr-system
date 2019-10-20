@@ -65,8 +65,9 @@ include 'header.php';
                                 <div class="form-group">
                                     <input type="password" name="user_password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
                                 </div>
-                                <div class="form-group m-0">
-                                    <button type="submit" name="login_button" class="btn">Login <i class="icon ion-ios-arrow-round-forward"></i></button>
+                                <div class="form-group m-0 d-flex align-items-center justify-content-between">
+                                    <button type="submit" name="login_button" class="btn">Login</button>
+                                    <a href="" class="text-dark float-right">Forgot Password</a>
                                 </div>
 &nbsp; 
                                 <div class="form-check d-flex align-items-center small">
